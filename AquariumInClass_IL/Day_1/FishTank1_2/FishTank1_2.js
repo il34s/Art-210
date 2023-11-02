@@ -1,17 +1,23 @@
 let VolImg;
 let sWImg;
+let speed;
+let direction;
+
 let x = 0;
 let velocity = 2;
 let acceleration = 0.05;
 
-function preload(){
-//VolImg = loadImage('data/volcano.png');
-}
+
 
 function setup() {
 createCanvas(550, 400);
 VolImg = loadImage('data/volcano.png');
 sWImg = loadImage('data/seaweed.png');
+x = width / 2;
+y= height / 2;
+speed = 2
+direction = 1; //1 for right, -1 for left
+
 }
 
 
@@ -43,14 +49,31 @@ rect (165, 300, 5, 50);
 rect (230, 300 , 5, 50);
 ellipse (200, 300 ,10, 10);
 
-// fish
-
   // volcano image
 image(VolImg, 0, 0);
 //image(VolImg, 0, height/2, VolImg.width/2, VolImg.height/2);
 image(VolImg, 310, 160, 300, 250);
 
+
+
+//seaweed
+image(sWImg, -30, 200, 200, 180);
+
+
 // blue fish 
+push();
+translate(x, y)
+scale(direction, 1);// flip fish
+
+pop();
+
+//move fish 
+x += speed * direction; 
+ // check edge and flip
+ if (x > width -12 || x < 12){
+ direction *=-1;
+ }
+
 fill(66, 135, 245);
 stroke(66, 135, 245);
 ellipse(x, height/2, 50, 50);
@@ -78,16 +101,12 @@ stroke(237, 215, 45)
 //quad(top left , bottom left, bottom right, top right)
 quad(x-40, 150, x-40, 260, x-35, 245, x-35, 165);
 
-
-
 x += velocity;
 if (x > width || x < 0)
  velocity *= -1
 }
 //seaweed image
-image(sWImg, 0, 0);
-image(sWImg, 0, height/2, sWIg.width/2, sWImg.height/2);
-   // volcano image
-//image(VolImg, 0, 0);
-//image(VolImg, 0, height/2, VolImg.width/2, VolImg.height/2);
-//image(VolImg, 310, 160, 300, 250);
+//image(sWImg, 0, 0);
+//image(sWImg, 0, height/2, sWIg.width/2, sWImg.height/2);
+
+ 
